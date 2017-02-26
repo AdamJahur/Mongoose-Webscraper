@@ -76,6 +76,30 @@ app.get('/articles/:id', function(req, res){
 	});
 });
 
+app.post('/savednote/:id', function(req, res){
+	var newNote = new Note(req.body);
+
+	newNote.save(function(err, doc){
+		if (err) {
+			console.log(err);
+		} else {
+			Article.findOneAndUpdate({'_id' : req.params.id}, {'note' : doc._id})
+			.exec(function(err, doc){
+				if (err) {
+					console.log(err);
+				} else {
+					res.send(doc);
+				}
+			});
+		}
+	});
+});
+
+
+
+
+
+
 
 
 
