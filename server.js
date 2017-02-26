@@ -95,6 +95,28 @@ app.post('/savednote/:id', function(req, res){
 	});
 });
 
+app.post('/deletenote/:id', function(req, res){
+	Article.find({'_id' : req.params.id}, 'note', function(err, doc){
+		if (err) {
+			console.log(err);
+		}
+		Note.find({'_id' : doc[0].note}).remove().exec(function(err, doc){
+			if (err) {
+				console.log(err);
+			}
+		});
+	});
+
+	Article.findOneAndUpdate({'_id' : req.params.id}, ($unset : {'note' : 1}))
+	.exec(function(err, doc){
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(doc);
+		}
+	});
+});
+
 
 
 
