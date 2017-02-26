@@ -64,4 +64,18 @@ app.get('/scrape', function(req, res){
 	})
 });
 
+app.get('/articles/:id', function(req, res){
+	Article.findOne({'_id' : req.params.id})
+	.populate('note')
+	.exec(function(err, doc){
+		if (err) {
+			console.log(err);
+		} else {
+			res.json(doc);
+		}
+	});
+});
+
+
+
 
