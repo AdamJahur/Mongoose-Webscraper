@@ -58,7 +58,34 @@ $(document).on('click', '#savenote', function(){
 	$('#bodyinput').val("");
 });
 
+$(document).on('click', '#deletenote', function(){
+	var thisID = $(this).attr('data-id');
 
+	$.ajax({
+		method: "POST",
+		url: "/deletenote/" + thisID,
+	})
+	.done(function( data ){
+		console.log(data);
+		$('#notes').empty();
+	});
+	location.reload();
+	$('#titleinput').val("");
+	$('#bodyinput').val("");
+});
+
+$(document).on('click', '#cnnlogo', function(){
+	$('#head').css("color", "white");
+	$.ajax({
+		method: "POST",
+		url: "/dropdb/"
+	})
+	.done(function( data ){
+		console.log("back from drop");
+		$('#head').css("color", "black");
+		location.reload();
+	});
+});
 
 
 
