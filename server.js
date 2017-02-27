@@ -14,7 +14,7 @@ app.use(express.static('public'));
 
 var database = {
 
-	local : 'mongodb://localhost/...'
+	local : 'mongodb://localhost/Mongoose-Webscraper'
 	remote : 'mongodb://...'
 }
 
