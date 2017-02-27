@@ -37,3 +37,28 @@ $(document).on('click', 'p', function(){
       	}
 	});
 });
+
+$(document).on('click', '#savenote', function(){
+	var thisID = $(this).attr('data-id');
+
+	$.ajax({
+		method: "POST",
+		url: "/savenote/" + thisID,
+		data: {
+			title: $('#titleinput').val(),
+			body: $('#bodyinput').val()
+		}
+	})
+	.done(function( data ){
+		console.log(data);
+		$('#notes').empty();
+	});
+	location.reload();
+	$('#titleinput').val("");
+	$('#bodyinput').val("");
+});
+
+
+
+
+
