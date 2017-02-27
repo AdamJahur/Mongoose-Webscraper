@@ -117,11 +117,33 @@ app.post('/deletenote/:id', function(req, res){
 	});
 });
 
+app.post('/dropdb', function(req, res){
+	Article.find({})
+	.populate('note')
+	.exec(function(err, doc){
+		if (err) {
+			console.log(err);
+		} else {
+			var removedArticles = 0;
+			for (i = 0; i < doc.length; i++){
+				if (doc[i].note == undefined){
+					Article.find({'_id' : doc[i]._id}).remove()
+					.exec(function(err, doc){
+						if (err) {
+							console.log(err);
+						} else {
+							++removedArticles;
+							console.log(removedArticles + " Total Articles removed");
+						}
+					})
+				}
+			}
+		}
+	})
 
+	res.end();
+});
 
-
-
-
-
-
-
+app.listen(PORT, function() {
+	console.log("Server listening on PORT: " + PORT);
+});
