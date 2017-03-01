@@ -12,16 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('public'));
 
-var database = {
-
-	local : 'mongodb://localhost/Mongoose-Webscraper'
-	remote : 'mongodb://heroku_d0qvc6xw:6d0kc7kdvpb2be2i4373ng8e7v@ds161039.mlab.com:61039/heroku_d0qvc6xw'
-}
-
-var whichDb = database.remote;
-mongoose.connect(whichDb);
-
-db = mongoose.connection;
+mongoose.connect("mongodb://localhost/mongoose-webscraper")
 
 db.on('error', function (err) {
 	console.log('Mongoose Error: ', err);
@@ -107,7 +98,7 @@ app.post('/deletenote/:id', function(req, res){
 		});
 	});
 
-	Article.findOneAndUpdate({'_id' : req.params.id}, ($unset : {'note' : 1}))
+	Article.findOneAndUpdate({'_id' : req.params.id}, ($unset: {'note' : 1}))
 	.exec(function(err, doc){
 		if (err) {
 			console.log(err);
