@@ -14,7 +14,7 @@ app.use(express.static('public'));
 
 var database = {
 	local: 'mongodb://localhost/mongoose-webscraper',
-	remote: 'mongodb://heroku_d0qvc6kc7kdvpb2be2i4373ng8e7v@ds161039.mlab.com:61039/heroku_d0qvc6xw'
+	remote: 'mongodb://heroku_d0qvc6kc7kdvpb2be2i4373ng8e7v@ds161039.mlab.com:61039/heroku_d0qvc6'
 }
 
 var whichDb = database.remote;
